@@ -1,0 +1,8 @@
+---
+- name: Playbook for creating user sasi
+  become: yes
+  hosts: test
+  tasks:
+    - name: task to creating user
+      user:
+        name: sasi 
