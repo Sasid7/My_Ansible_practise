@@ -1,0 +1,9 @@
+---
+- name: uninstaling httpd pkg
+  become: yes
+  hosts: localhost
+  tasks:
+    - name: un-instaling httpd
+      yum:
+        name: httpd
+        state: absent

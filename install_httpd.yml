@@ -1,0 +1,36 @@
+---
+- name: instaling httpd pkg
+  become: yes
+  hosts: localhost
+  tasks:
+    - name: installing httpd
+      yum:
+        name: httpd
+        state: latest
+      when: ansible_distribution == "Amazon"
+      notify: start httpd
+    - name: installing apache2
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_os_family == "Debian"
+      notify: start apache2
+    - name: flush handlers    # By default, handlers run at the end of the play once all the regular tasks have been executed.# If you want handlers to run before the end of the play or between tasks, add a meta task to flush them using the meta module
+      meta: flush_handlers
+    - name: copying content 
+      copy:
+        src: /home/ansadmin/git/index.html
+        dest: /var/www/html/
+  handlers:
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+    - name: start apache2
+      service:
+        name: apache2
+        state: started
+# Handlers are usually used to start, restart, reload and stop services on target nodes only when there is a change in the state of the task, and not when no change is made
+
+
+
