@@ -1,0 +1,12 @@
+---
+- name: creating multiple user
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: creating multiple users
+      user:
+        name: '{{item}}'
+      with_items:
+        - raj
+        - hari
+        - venu
