@@ -1,0 +1,13 @@
+---
+- name: installing multiple packages using playbook
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: installing multiple pkgs
+      yum:
+        name: '{{item}}'
+        state: latest
+      with_items:
+        - git
+        - tree
+       
