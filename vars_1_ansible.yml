@@ -1,0 +1,10 @@
+---
+- name: Using vars sections to create user
+  hosts: localhost
+  become: yes
+  vars:
+    name: pen
+  tasks:
+    - name: creating user {{name}}
+      user:
+        name: '{{name}}'
