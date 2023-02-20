@@ -1,0 +1,27 @@
+---
+- name: setup tomcat on ec2 instance
+  become: yes
+  hosts: localhost
+  tasks:
+    - name: Instaling java application
+      yum:
+        name: java
+        state: latest
+    - name: Downloading tomcat binary from website
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+        dest: /opt/
+    - name: Unzip and untar tomcatfile
+      unarchive:
+        src: /opt/apache-tomcat-9.0.71.tar.gz
+        dest: /opt
+      register: result
+      
+    - name: change permissions for bin file
+      file:
+        path: /opt/apache-tomcat-9.0.71/bin/startup.sh
+        mode: 0777
+    - name: start tomcat application
+      shell:  nohup ./startup.sh
+      args:
+        chdir: /opt/apache-tomcat-9.0.71/bin
