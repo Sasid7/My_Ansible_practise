@@ -1,0 +1,18 @@
+---
+# tasks file for installing_httpd_role
+- name: installing {{pkg1}}
+  yum:
+    name: '{{pkg1}}'
+    state: present
+  when: ansible_os_family == "RedHat"
+  notify: start {{pkg1}}
+- name: installing {{pkg2}}
+  apt:
+    name: '{{pkg2}}'
+    state: present
+  when: ansible_os_family == "Debian"
+  notify: start {{pkg2}}
+- name: copying content 
+  copy:
+    src: index.html
+    dest: /var/www/html

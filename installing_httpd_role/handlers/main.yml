@@ -1,0 +1,10 @@
+---
+# handlers file for installing_httpd_role
+- name: start {{pkg1}}
+  service:
+    name: "{{pkg1}}"
+    state: started
+- name: start {{pkg2}}
+  service:
+    name: "{{pkg2}}"
+    state: started

@@ -1,0 +1,6 @@
+---
+- name: installing httpd
+  hosts: localhost
+  become: yes
+  roles:
+  - installing_httpd_role

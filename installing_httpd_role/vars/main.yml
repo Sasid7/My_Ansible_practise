@@ -1,0 +1,4 @@
+---
+# vars file for installing_httpd_role
+pkg1: httpd
+pkg2: apache2
